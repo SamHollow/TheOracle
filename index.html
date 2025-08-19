@@ -1,52 +1,225 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Medicina & Esoterismo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Medicina & Esoterismo — Entre la ciencia y el misterio</title>
+  <meta name="description" content="Consulta híbrida: medicina basada en evidencia y simbolismo esotérico. Diagnóstico, terapia y ritual en diálogo para una salud integral." />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #0d0d0d;
-      color: #f5f5f5;
-      text-align: center;
+    :root{
+      --bg:#0c0c0f;         /* fondo base */
+      --bg-soft:#121219;    /* paneles */
+      --text:#eae9f0;       /* texto principal */
+      --muted:#b7b5c2;      /* texto secundario */
+      --brand:#d6b36a;      /* dorado místico */
+      --brand-soft:#3a2b13; /* brillo suave */
+      --accent:#7a5cff;     /* acento sutil */
+      --ok:#4ade80;         /* verde para highlights */
+      --danger:#f87171;     /* rojo para énfasis */
+      --radius:18px;
+      --shadow:0 10px 35px rgba(0,0,0,.35);
+      --shadow-soft:0 8px 20px rgba(0,0,0,.25);
     }
-    header {
-      padding: 60px 20px;
-      background: linear-gradient(135deg, #1a1a1a, #3a0d3a);
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(214,179,106,.08), transparent 60%),
+        radial-gradient(900px 500px at -10% 20%, rgba(122,92,255,.08), transparent 60%),
+        var(--bg);
+      color:var(--text);
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
+
+    /* --- Layout --- */
+    .container{max-width:1100px; margin:0 auto; padding:0 20px}
+
+    /* --- Topbar --- */
+    header{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(10px);
+      background:linear-gradient(to bottom, rgba(12,12,15,.85), rgba(12,12,15,.35));
+      border-bottom:1px solid rgba(214,179,106,.15);
     }
-    main {
-      padding: 40px 20px;
-      max-width: 800px;
-      margin: auto;
+    .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text)}
+    .logo{width:28px; height:28px; border-radius:50%; background:
+      radial-gradient(40% 40% at 65% 35%, var(--brand), transparent 55%),
+      radial-gradient(60% 60% at 35% 65%, #8f6f2e, transparent 60%),
+      #332510; box-shadow:inset 0 0 22px rgba(214,179,106,.35)}
+    .brand span{font-weight:700; letter-spacing:.3px}
+
+    nav a{color:var(--muted); text-decoration:none; margin-left:18px; font-size:.98rem}
+    nav a:hover{color:var(--text)}
+
+    /* --- Hero --- */
+    .hero{padding:96px 0 80px}
+    .hero-card{
+      background:linear-gradient(180deg, rgba(26,26,33,.65), rgba(26,26,33,.35));
+      border:1px solid rgba(214,179,106,.18);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:42px; text-align:center;
     }
-    footer {
-      margin-top: 50px;
-      padding: 20px;
-      background: #1a1a1a;
-      font-size: 0.9em;
-      color: #bbb;
+    .eyebrow{display:inline-block; font-size:.78rem; letter-spacing:.12em; color:var(--brand); text-transform:uppercase; margin-bottom:12px}
+    h1{margin:0 0 10px; font-size:clamp(2rem, 5vw, 3rem); line-height:1.08}
+    .sub{color:var(--muted); margin:0 auto 26px; max-width:48ch}
+
+    .cta{display:inline-block; padding:12px 18px; border-radius:14px; text-decoration:none; color:#111; font-weight:700; background:linear-gradient(180deg, var(--brand), #caa24e); box-shadow:0 6px 20px rgba(214,179,106,.35)}
+    .cta:hover{transform:translateY(-1px)}
+    .cta.secondary{background:transparent; color:var(--text); border:1px solid rgba(214,179,106,.35)}
+
+    .cta-row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+
+    /* --- Sections --- */
+    section{padding:64px 0}
+    .grid{display:grid; gap:22px}
+    @media(min-width:800px){.grid.cols-3{grid-template-columns:repeat(3,1fr)}}
+    @media(min-width:800px){.grid.cols-2{grid-template-columns:repeat(2,1fr)}}
+
+    .card{
+      background:linear-gradient(180deg, rgba(26,26,33,.55), rgba(26,26,33,.25));
+      border:1px solid rgba(214,179,106,.12);
+      border-radius:var(--radius); padding:22px; box-shadow:var(--shadow-soft)
     }
+
+    .kicker{color:var(--brand); font-size:.9rem; letter-spacing:.16em; text-transform:uppercase; margin-bottom:6px}
+    h2{margin:0 0 8px; font-size:clamp(1.6rem, 3.6vw, 2.2rem)}
+    p{color:var(--muted); line-height:1.7}
+    .list{margin:0; padding:0; list-style:none}
+    .list li{display:flex; gap:10px; align-items:flex-start; padding:8px 0}
+    .dot{width:10px; height:10px; border-radius:50%; background:var(--brand); margin-top:7px; flex:0 0 auto}
+
+    /* --- Footer --- */
+    footer{padding:36px 0 60px; border-top:1px solid rgba(214,179,106,.15); color:var(--muted)}
+    .foot{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap}
+    .small{font-size:.9rem}
+
+    /* --- Utilities --- */
+    .center{text-align:center}
+    .muted{color:var(--muted)}
+    .spacer{height:12px}
+    .pill{display:inline-block; font-size:.8rem; padding:6px 10px; border:1px solid rgba(214,179,106,.25); border-radius:999px; color:var(--muted)}
   </style>
 </head>
 <body>
+  <!-- Topbar -->
   <header>
-    <h1>Medicina & Esoterismo</h1>
-    <p>Entre la ciencia y el misterio</p>
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Inicio">
+        <div class="logo" aria-hidden="true"></div>
+        <span>Medicina & Esoterismo</span>
+      </a>
+      <nav aria-label="Principal">
+        <a href="#servicios">Servicios</a>
+        <a href="#metodo">Método</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
   </header>
-  <main>
-    <p>Un espacio donde el diagnóstico clínico se une al simbolismo esotérico. 
-       Cuerpo, mente y espíritu dialogan en busca de equilibrio, 
-       combinando evidencia y ritual como caminos hacia la salud integral.</p>
+
+  <!-- Hero -->
+  <main id="top" class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <span class="eyebrow">Entre la ciencia y el misterio</span>
+        <h1>Consulta híbrida: clínica + simbolismo</h1>
+        <p class="sub">Un espacio donde el diagnóstico médico se une al lenguaje de los símbolos. Cuerpo, mente y espíritu dialogan en busca de equilibrio, combinando evidencia y ritual como rutas hacia una salud integral.</p>
+        <div class="cta-row">
+          <a class="cta" href="https://wa.me/5210000000000" target="_blank" rel="noopener">Agenda tu consulta</a>
+          <a class="cta secondary" href="#servicios">Ver servicios</a>
+        </div>
+      </div>
+    </div>
   </main>
+
+  <!-- Servicios -->
+  <section id="servicios">
+    <div class="container">
+      <span class="kicker">Servicios</span>
+      <h2>Lo clínico y lo simbólico en diálogo</h2>
+      <div class="grid cols-3" style="margin-top:18px">
+        <div class="card">
+          <h3>Consulta médica integral</h3>
+          <p>Evaluación clínica basada en evidencia: historia, exploración dirigida y plan terapéutico. Salud mental con enfoque respetuoso y práctico.</p>
+          <span class="pill">Basado en evidencia</span>
+        </div>
+        <div class="card">
+          <h3>Tarot & arquetipos</h3>
+          <p>Lecturas como espejos del proceso interno. No predicción: reflexión guiada para tomar decisiones con mayor claridad.</p>
+          <span class="pill">Enfoque no determinista</span>
+        </div>
+        <div class="card">
+          <h3>Ritual minimalista</h3>
+          <p>Prácticas simbólicas simples para anclar hábitos, cerrar ciclos o iniciar procesos de cambio, sin dogmas.</p>
+          <span class="pill">Simbología práctica</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Método -->
+  <section id="metodo">
+    <div class="container grid cols-2">
+      <div>
+        <span class="kicker">Método</span>
+        <h2>Puente entre evidencia y sentido</h2>
+        <p>El objetivo no es reemplazar la medicina por lo esotérico, sino tender un puente. Donde una exploración clínica convive con una lectura simbólica, y cada herramienta aporta a comprender mejor a la persona completa.</p>
+        <ul class="list">
+          <li><span class="dot"></span><span>Evaluación clínica clara, con lenguaje sencillo y planes accionables.</span></li>
+          <li><span class="dot"></span><span>Herramientas simbólicas como metáforas vivas para el cambio.</span></li>
+          <li><span class="dot"></span><span>Ética y límites: sin promesas mágicas ni abandono del criterio médico.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Manifiesto breve</h3>
+        <p class="muted">La medicina cura la carne; el simbolismo sana el sentido. Ambas son rutas hacia una misma meta: habitar el cuerpo con comprensión.</p>
+        <div class="spacer"></div>
+        <p class="muted">Entre la duda cínica y la fe ciega, elegimos la curiosidad informada.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre mí -->
+  <section id="sobre-mi">
+    <div class="container grid cols-2">
+      <div>
+        <span class="kicker">Quién soy</span>
+        <h2>Médico general + explorador simbólico</h2>
+        <p>Médico con práctica clínica y enfoque en salud mental. Intereso integrar arquetipos, rituales sencillos y lectura simbólica como herramientas de autoconocimiento que acompañen —nunca sustituyan— el cuidado médico.</p>
+      </div>
+      <div class="card">
+        <p class="muted"><strong>Nota:</strong> Este servicio no reemplaza urgencias ni manejo hospitalario. Se sugiere consulta presencial cuando la situación lo requiera.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto">
+    <div class="container center">
+      <span class="kicker">Contacto</span>
+      <h2>Agenda o pregunta lo que necesites</h2>
+      <p class="muted">Elige el canal que prefieras. Respondo habitualmente en 24–48 h.</p>
+      <div class="cta-row" style="margin-top:14px">
+        <a class="cta" href="https://wa.me/5210000000000" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="cta secondary" href="mailto:tu.correo@ejemplo.com">Correo</a>
+      </div>
+      <p class="muted" style="margin-top:18px">Añade tu horario disponible y un breve motivo de consulta.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    © 2025 Medicina & Esoterismo
+    <div class="container foot">
+      <div class="small">© <span id="y"></span> Medicina & Esoterismo</div>
+      <div class="small">Hecho con calma y curiosidad</div>
+    </div>
   </footer>
+
+  <script>
+    // Año dinámico
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
